@@ -1,0 +1,283 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Zone Leader</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Kanit:500|Patua+One|Bowlby+One+SC&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Acme|Bree+Serif&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Almarai|Ubuntu&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans|Roboto+Mono&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+    <style>
+        .campaigner-caption {
+            font-family: 'Bree Serif', serif;
+            font-size: 2vh;
+            padding-top: 2.6vh;
+            padding-left: 2.2vw;
+            color: #ffffff;
+        }
+
+        #logout-btn {
+            background-color: #FF6700;
+        }
+
+        #logout-btn:hover {
+            background-color: green;
+            border: green 2px solid;
+        }
+
+        .tab a.inactive {
+            color: #3a6ea5;
+        }
+
+        .tabs .tab a:hover,
+        .tabs .tab a.active {
+            background-color: transparent;
+            color: #3a6ea5;
+        }
+
+        .tabs .indicator {
+            position: absolute;
+            bottom: 0;
+            height: 2px;
+            background-color: #004E98;
+            will-change: left, right;
+        }
+
+        .tabs .tab a:focus,
+        .tabs .tab a:focus.active {
+            background-color: #EBEBEB;
+            outline: none;
+        }
+
+        .tabs .tab a {
+            color: #004E98;
+            display: block;
+            width: 100%;
+            height: 100%;
+            padding: 0 24px;
+            font-size: 14px;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            -webkit-transition: color .28s ease, background-color .28s ease;
+            transition: color .28s ease, background-color .28s ease;
+        }
+
+        .participant-list-btn {
+            background-color: #FF6700;
+            border: #FF6700 1.3px solid;
+        }
+
+        .participant-list-btn:hover {
+            background-color: #004E98;
+            border: #004e98 2px solid;
+        }
+
+
+        .btn,
+        .btn-large,
+        .btn-small {
+            /* Participant list button onclick color change*/
+            text-decoration: none;
+            color: #fff;
+            background-color: #FF6700;
+            text-align: center;
+            letter-spacing: .5px;
+            -webkit-transition: background-color .2s ease-out;
+            transition: background-color .2s ease-out;
+            cursor: pointer;
+        }
+
+        a {
+            color: #004E98;
+            text-decoration: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .total-registrations {
+            /* font-family: 'Acme', sans-serif; */
+            font-family: 'Roboto Mono', monospace;
+            color: floralwhite;
+            border-bottom: #FF6700 1.5px solid;
+            font-size: 3.5vh;
+        }
+
+        .total-payment {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 3.5vh;
+            border-bottom: #FF6700 1.5px solid;
+            color: floralwhite;
+        }
+
+        #campaigner-details {
+            font-family: 'Fira Sans', sans-serif;
+        }
+
+        @media screen and (max-width: 670px) {
+
+            .participant-list-btn {
+                width: fit-content;
+                height: fit-content;
+                font-size: 1.5vh;
+                background-color: #FF6700;
+                border: #FF6700 0px solid;
+            }
+
+            .participant-list-btn:hover {
+                background-color: #004E98;
+                border: #004e98 0px solid;
+            }
+        }
+    </style>
+    <!-- Jquery For data-manipulation -->
+    <script src="/assets/zonel.js"></script>
+    <script src="/app.js"></script>
+</head>
+
+<body>
+    <div class="section" style="background-color: #3a6ea5;">
+        <div class="row">
+            <div class="campaigner-caption left">
+                Zone Leader, Kaplit
+            </div>
+            <div style="padding-right: 2vw; padding-top: 2vh;">
+                <form action="/logout">
+                    <button class="btn right" id="logout-btn" type="submit">Logout</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="section center" style="background-color: #3A6EA5;">
+        <div class="row">
+            <div class="col s12 l4  push-l2">
+                <span class="total-registrations">
+                    <% if (locals.regCount && locals.regCount.length > 0) {%>
+                       Zone Registrations: <span> <%= regCount[0].count%></span>
+                    <%}%>
+                </span>
+            </div>
+            <div class="col s12 l4 push-l2">
+                <span class="total-payment">
+                    <% if (locals.regAmount && locals.regAmount.length > 0) {%>
+                       Zone Collection: <span> <%= regAmount[0].amount%></span>
+                    <%}%>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-------------------------------------------------------- TABS FROM HERE ----------------------------------------------------->
+
+    <div class="row">
+        <div class="col s12">
+            <ul class="tabs">
+
+                <!-- <% if (locals.zleader) { %> -->
+                <% if (zleader.length > 0) { %>
+                <li class="tab col s4">
+                    <a href="#test1" id="clg1" class="active" style="color:#3a6ea5;"><%= zleader[0].college_name %></a>
+                    </li>
+                <% } %>
+                <% if (zleader.length > 1) { %>
+                <li class="tab col s4">
+                    <a href="#test2" id="clg2" style="color:#3a6ea5;"><%= zleader[1].college_name %></a></li>
+                <% } %>
+                <% if (zleader.length > 2) { %>
+                <li class="tab col s4">
+                    <a href="#test3" id="clg3" style="color:#3a6ea5;"><%= zleader[2].college_name %></a></li>
+                <% } %>
+                <!-- <% } %>  -->
+        </div>
+        <!-- College 1 -->
+        <div id="test1" class="col s12 tab-content" style="padding-top: 2.5vh;">
+            <div class="col s6 m6 l6 push-m1">
+                <!-- card here -->
+                <div class="card-panel center" style="background-color: #3A6EA5;">
+                    <p class="white-text center" style="font-size: 3vh;" id="card-details">Varun
+                    </p>
+                    <p class="white-text " id="campaigner-details">Amount Collected: 1500</p>
+                    <p class="white-text " id="campaigner-details">Participants influenced: 10</p>
+                    <!-- <a href="#" class="btn participant-list-btn" id="varun">Participant list</a> -->
+                </div>
+            </div>
+            <div class="col s6 m6 l6 push-m1 ">
+                <!-- card here -->
+                <div class="card-panel center" style="background-color: #3A6EA5;">
+                    <p class="white-text center" style="font-size: 3vh;" id="card-details">Varun
+                    </p>
+                    <p class="white-text" id="campaigner-details">Amount Collected: 1500</p>
+                    <p class="white-text" id="campaigner-details">Participants influenced: 10</p>
+                    <!-- <a href="#" class="btn participant-list-btn" id="varun">Participant list</a> -->
+                </div>
+            </div>
+        </div>
+        <!-- College 2 -->
+        <div id="test2" class="col s12 tab-content" style="padding-top: 2.5vh;">
+            <div class="col s6 m6 l6 push-m1">
+                <!-- card here -->
+                <div class="card-panel center" style="background-color: #3A6EA5;">
+                    <p class="white-text center" style="font-size: 3vh;" id="card-details">Dhruvil
+                    </p>
+                    <p class="white-text " id="campaigner-details">Amount Collected: 2000</p>
+                    <p class="white-text " id="campaigner-details">Participants influenced: 10</p>
+                    <!-- <a href="#" class="btn participant-list-btn" id="varun">Participant list</a> -->
+                </div>
+            </div>
+            <div class="col s6 m6 l6 push-m1 ">
+                <!-- card here -->
+                <div class="card-panel center" style="background-color: #3A6EA5;">
+                    <p class="white-text center" style="font-size: 3vh;" id="card-details">Dhruvil
+                    </p>
+                    <p class="white-text" id="campaigner-details">Amount Collected: 2000</p>
+                    <p class="white-text" id="campaigner-details">Participants influenced: 10</p>
+                    <!-- <a href="#" class="btn participant-list-btn" id="varun">Participant list</a> -->
+                </div>
+            </div>
+        </div>
+        <!-- College 3 -->
+        <div id="test3" class="col s12 tab-content" style="padding-top: 2.5vh;">
+            <div class="col s6 m6 l6 push-m1">
+                <!-- card here -->
+                <div class="card-panel center" style="background-color: #3A6EA5;">
+                    <p class="white-text center" style="font-size: 3vh;" id="card-details">Dharam
+                    </p>
+                    <p class="white-text " id="campaigner-details">Amount Collected: 5000</p>
+                    <p class="white-text " id="campaigner-details">Participants influenced: 20</p>
+                    <!-- <a href="#" class="btn participant-list-btn" id="varun">Participant list</a> -->
+                </div>
+            </div>
+            <div class="col s6 m6 l6 push-m1 ">
+                <!-- card here -->
+                <div class="card-panel center" style="background-color: #3A6EA5;">
+                    <p class="white-text center" style="font-size: 3vh;" id="card-details">Dharam
+                    </p>
+                    <p class="white-text" id="campaigner-details">Amount Collected: 5000</p>
+                    <p class="white-text" id="campaigner-details">Participants influenced: 20</p>
+                    <!-- <a href="#" class="btn participant-list-btn" id="varun">Participant list</a> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section" style="background-color: #3A6EA5; min-height: 300px;">
+
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.tabs').tabs();
+        });
+    </script>
+</body>
+
+</html>

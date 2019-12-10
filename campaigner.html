@@ -1,0 +1,207 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Campaigner</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Kanit:500|Patua+One|Bowlby+One+SC&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Acme|Bree+Serif&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Almarai|Ubuntu&display=swap" rel="stylesheet">
+    
+    <style>
+        html{
+            background-color: white;
+        }
+
+        .total-registrations{
+            /* font-family: 'Acme', sans-serif; */
+            font-family: 'Bree Serif', serif;
+            color: floralwhite;
+            font-size: 3.5vh;
+        }
+
+        .total-payment{
+            font-family: 'Bree Serif', serif;
+            font-size: 3.5vh;
+            color: floralwhite;
+        }
+        
+        .campaigner-caption{
+            font-family: 'Bree Serif', serif;
+            font-size: 2vh;
+            padding-top: 2.6vh;
+            padding-left: 2.2vw;
+            color: floralwhite ;
+        }
+
+        #switches{
+            
+            color: aliceblue;
+        }
+
+        #card-details{
+            font-family: 'Ubuntu', sans-serif;
+        }
+        #logout-btn{
+            background-color: #FF6700;
+        }
+
+        #logout-btn:hover{
+            background-color: green;
+            border: green 2px solid;
+            
+        }
+
+        #search-btn{
+            background-color: #FF6700;
+        }
+    
+        #search-btn:hover{
+            background-color: rgb(228, 91, 0);
+            zoom: 1.1;
+        }
+
+        input:not([type]), input[type=text]:not(.browser-default), input[type=password]:not(.browser-default), input[type=email]:not(.browser-default), input[type=url]:not(.browser-default), input[type=time]:not(.browser-default), input[type=date]:not(.browser-default), input[type=datetime]:not(.browser-default), input[type=datetime-local]:not(.browser-default), input[type=tel]:not(.browser-default), input[type=number]:not(.browser-default), input[type=search]:not(.browser-default), textarea.materialize-textarea {
+            border: none;
+            border-bottom: 1px solid #FF6700;
+            border-radius: 0;
+            outline: none;
+            height: 3rem;
+            width: 100%;
+            font-size: 16px;
+            margin: 0 0 8px 0;
+            padding: 0;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+            -webkit-box-sizing: content-box;
+            box-sizing: content-box;
+            -webkit-transition: border .3s, -webkit-box-shadow .3s;
+            transition: border .3s, -webkit-box-shadow .3s;
+            transition: box-shadow .3s, border .3s;
+            transition: box-shadow .3s, border .3s, -webkit-box-shadow .3s;
+        }
+
+        .switch label input[type=checkbox]:checked+.lever:after {
+            background-color: #FF6700;
+        }
+        .switch label input[type=checkbox]:checked+.lever {
+            background-color: rgb(253, 142, 68);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="section" style="background-color: #3a6ea5;">
+        <div class="row" >
+            <div class="campaigner-caption left" >
+                Campaigner, Varun   
+            </div> 
+            <div style="padding-right: 2vw; padding-top: 2vh;">
+                <a href="#" class="btn right" id="logout-btn" >Logout</a>
+            </div>
+                
+            
+        </div> 
+    </div> 
+          
+    <div class="section" style="background-color: #3a6ea5;">
+        <div class="row">
+            <div class="col s10 l4 push-s2 push-l2">
+                <span class="total-registrations">
+                    My Registrations: <span> 359</span>
+                </span>
+            </div>
+            <div class="col s10 l4 push-s2 push-l3">
+                    <span class="total-payment">
+                        My Collection: <span> 14500 Rs</span>
+                    </span>
+            </div>
+        </div>
+    </div>
+    <div class="divider" style="background-color: #004E98;">
+    </div>
+
+
+        <div class="section" >
+            <div class="row" style="background-color:#3A6EA5;">
+                <div class="input-field col s6 l5 push-s2 push-l3">
+                    <!-- <i class="material-icons prefix">search</i> -->
+                    <input id="icon_prefix" type="text" class="validate" placeholder="Search..">
+                </div>
+                <div class="col s2 l4 push-s2 push-l3" style="padding-top: 2.2vh;">
+                    <a class="btn" id="search-btn"><i class="material-icons">search</i></a>
+                </div>  
+               
+            </div>
+        
+            <!-- cards here -->
+
+            <div class="row">
+                <div class="col s10 m5 l2 push-s1 push-m1 push-l5">
+                  <div class="card-panel center" style="background-color:#3A6EA5;">
+                    <p class="white-text" style="font-size: 2.2vm;" id="card-details">Candice Redding
+                    </p>
+                        <div class="switch" style="padding-top: 13px;"> <!--Switch here -->
+                            <label id="switches">
+                              Unpaid
+                              <input type="checkbox">
+                              <span class="lever"></span>
+                              Paid
+                            </label>
+                        </div>
+                        
+                    <p class="white-text" id="card-details">Temp ID: CZ0221</p>
+                    <p class="white-text" id="card-details">College ID: CID0221</p>
+                    <p class="white-text" id="card-details">Event ID: EID0221</p>
+                  </div>
+                </div>
+
+                <!-- <div class="col s10 m5 l4 push-s1 push-m1 "> <!-card 2->
+                    <div class="card-panel teal darken-1">
+                      <p class="white-text" style="font-size: 2.2vm;">Candice Redding
+                      </p>
+                          <div class="switch" style="padding-top: 13px;"> <--Switch here --
+                              <label id="switches">
+                                Unpaid
+                                <input type="checkbox">
+                                <span class="lever"></span>
+                                Paid
+                              </label>
+                          </div>
+                          
+                      <p class="white-text" id="card-details">Temp ID: CZ0221</p>
+                      <p class="white-text" id="card-details">College ID: CID0221</p>
+                      <p class="white-text" id="card-details">Event ID: EID0221</p>
+                    </div>
+                  </div>
+
+                  <div class="col s10 m5 l4 push-s1 push-m1 "> <!-card 3--
+                    <div class="card-panel teal darken-1">
+                      <p class="white-text" style="font-size: 2.2vm;">Candice Redding
+                      </p>
+                          <div class="switch" style="padding-top: 13px;"> <--Switch here --
+                              <label id="switches">
+                                Unpaid
+                                <input type="checkbox">
+                                <span class="lever"></span>
+                                Paid
+                              </label id="switches">
+                          </div>
+                          
+                      <p class="white-text" id="card-details">Temp ID: CZ0221</p>
+                      <p class="white-text" id="card-details">College ID: CID0221</p>
+                      <p class="white-text" id="card-details">Event ID: EID0221</p>
+                    </div>
+                  </div>
+
+            </div> -->
+
+        </div> <!--Section ends here -->
+        
+    
+
+</body>
+</html>

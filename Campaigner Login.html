@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css?family=Merriweather&display=swap");
+
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+        }
+
+        .login {
+            height: 100%;
+            width: 100%;
+            background-image: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4) ), url("Campaigner BG.jpg");
+            background-position: center;
+            background-size: cover;
+            position: absolute;
+        }
+
+        .form-box {
+            width: 380px;
+            height: 390px;
+            position: relative;
+            margin: 8% auto;
+            background: #fff;
+            padding: 5px;
+            text-align: center;
+            opacity: 0.9;
+            border-radius: 15px;
+        }
+
+        .label-box {
+            width: 220;
+            margin: 15px auto;
+            position: relative;
+            /* box-shadow: 0 0 20px 9px #ff61241f; */
+            /* border-radius: 30px; */
+            font-size: 40px;
+            font-weight: 700;
+            color: #2193b0;
+        }
+
+        span {
+            font-family: "Merriweather", serif;
+        }
+
+        .input-group {
+            top: 150px;
+            position: absolute;
+            width: 280px;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 10px 0;
+            margin: 5px 0;
+            border-left: 0;
+            border-top: 0;
+            border-right: 0;
+            border-bottom: 1px solid #999;
+            outline: none;
+            background: transparent;
+        }
+
+        .submit-btn {
+            width: 65%;
+            padding: 10px 30px;
+            cursor: pointer;
+            display: block;
+            margin: auto;
+            /*background: linear-gradient(to right, #ff105f, #ffad06);*/
+            background: linear-gradient(to right, #2193b0, #6dd5ed);
+            border: 0;
+            outline: none;
+            border-radius: 30px;
+            color: white;
+            font-size: 16px;
+            font-family: "Merriweather", serif;
+        }
+
+        #login {
+            left: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login">
+        <div class="form-box">
+            <div class="label-box">
+                <!-- l<span>Campaigner</span> -->
+                <br />
+                <span>Login</span>
+            </div>
+            <form action="auth" id="login" class="input-group" method="post">
+                <input type="text"
+                       class="input-field"
+                       id="user_name"
+                       name="username"
+                       placeholder="User Name"
+                       required />
+                <input type="password"
+                       class="input-field"
+                       id="password"
+                       name="password"
+                       placeholder="Password"
+                       required />
+                <br />
+                <br />
+                <br />
+                <input type="submit" class="submit-btn" value="Log In" />
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

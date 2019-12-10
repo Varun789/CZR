@@ -1,0 +1,206 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Campaigner</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Kanit:500|Patua+One|Bowlby+One+SC&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Acme|Bree+Serif&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Almarai|Ubuntu&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+    <style>
+        html {
+            background-color: white;
+        }
+
+        .total-registrations {
+            /* font-family: 'Acme', sans-serif; */
+            font-family: 'Bree Serif', serif;
+            color: floralwhite;
+            font-size: 3.5vh;
+        }
+
+        .total-payment {
+            font-family: 'Bree Serif', serif;
+            font-size: 3.5vh;
+            color: floralwhite;
+        }
+
+        .campaigner-caption {
+            font-family: 'Bree Serif', serif;
+            font-size: 2vh;
+            padding-top: 2.6vh;
+            padding-left: 2.2vw;
+            color: floralwhite;
+        }
+
+        #switches {
+
+            color: aliceblue;
+        }
+
+        #card-details {
+            font-family: 'Ubuntu', sans-serif;
+        }
+
+        #logout-btn {
+            background-color: #FF6700;
+        }
+
+        #logout-btn:hover {
+            background-color: green;
+            border: green 2px solid;
+
+        }
+
+        #search-btn {
+            background-color: #FF6700;
+        }
+
+        #search-btn:hover {
+            background-color: rgb(228, 91, 0);
+            zoom: 1.1;
+        }
+
+        input:not([type]),
+        input[type=text]:not(.browser-default),
+        input[type=password]:not(.browser-default),
+        input[type=email]:not(.browser-default),
+        input[type=url]:not(.browser-default),
+        input[type=time]:not(.browser-default),
+        input[type=date]:not(.browser-default),
+        input[type=datetime]:not(.browser-default),
+        input[type=datetime-local]:not(.browser-default),
+        input[type=tel]:not(.browser-default),
+        input[type=number]:not(.browser-default),
+        input[type=search]:not(.browser-default),
+        textarea.materialize-textarea {
+            border: none;
+            border-bottom: 1px solid #FF6700;
+            border-radius: 0;
+            outline: none;
+            height: 3rem;
+            width: 100%;
+            font-size: 16px;
+            margin: 0 0 8px 0;
+            padding: 0;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+            -webkit-box-sizing: content-box;
+            box-sizing: content-box;
+            -webkit-transition: border .3s, -webkit-box-shadow .3s;
+            transition: border .3s, -webkit-box-shadow .3s;
+            transition: box-shadow .3s, border .3s;
+            transition: box-shadow .3s, border .3s, -webkit-box-shadow .3s;
+        }
+
+        .switch label input[type=checkbox]:checked+.lever:after {
+            background-color: #FF6700;
+        }
+
+        .switch label input[type=checkbox]:checked+.lever {
+            background-color: rgb(253, 142, 68);
+        }
+    </style>
+    <!-- Jquery For data-manipulation -->
+    <script src="/assets/campg.js"></script>
+    <script src="/app.js"></script>
+</head>
+
+<body>
+    <!-- Top section -->
+    <div class="section" style="background-color: #3a6ea5;">
+        <div class="row">
+            <div class="campaigner-caption left">
+                Campaigner 
+            </div>
+            <div style="padding-right: 2vw; padding-top: 2vh;">
+                <form action="/logout">
+                    <button class="btn right" id="logout-btn" type="submit">Logout</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="section" style="background-color: #3a6ea5;">
+        <div class="row">
+            <div class="col s10 l4 push-s2 push-l2">
+                <span class="total-registrations">
+                    <% if (locals.regCount && locals.regCount.length > 0) {%>
+                    My Registrations: <span>  <%= regCount[0].count%></span>
+                    <%}%>
+                </span>
+            </div>
+            <div class="col s10 l4 push-s2 push-l3">
+                <span class="total-payment">
+                    <% if (locals.regCount && locals.regCount.length > 0) {%>                    
+                    My Collection: <span>  <%= regAmount[0].amount%></span>
+                    <%}%>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="divider" style="background-color: #004E98;">
+    </div>
+
+    <!-- Search Module -->
+    <div class="section">
+        <div class="row" style="background-color:#3A6EA5;">
+            <div class="input-field col s6 l5 push-s2 push-l3">
+                <%if (locals.tempID) {%>
+                    <input id="icon_prefix tempID" type="text" class="validate tempID" placeholder="Search Temporary ID..." value="<%= tempID %>"/>
+                <%} else {%>
+                    <input id="icon_prefix tempID" type="text" class="validate tempID" placeholder="Search Temporary ID..." value=""/>
+                <%}%>
+            </div>
+            <div class="col s2 l4 push-s2 push-l3" style="padding-top: 2.2vh;">
+                <button class="btn sBtn" id="search-btn"><i class="material-icons">search</i></button>
+            </div>
+
+        </div>
+
+        <!-- cards here -->
+        <% if  (locals.pds ) { %>
+            <div class="row">
+                <div class="col s10 m5 l3 push-s1 push-m2 push-l4">
+                    <div class="card-panel center" style="background-color:#3A6EA5;">
+                        <p class="white-text" style="font-size: 2rem;" id="card-details"> <%= pds[0].part_name %>
+                        <div class="switch" style="padding-top: 13px;">
+                            <!--Switch here -->
+                            <label id="switches">
+                                <span style="font-size: 1.3rem;">Unpaid</span>
+                                <% if(payF[0].payFLAG){ %> 
+                                <input type="checkbox" checked disabled>
+                                <% } else { %>
+                                    <input type="checkbox" class="payFlag">
+                                <% } %>
+                                <span class="lever"></span>
+                                <span style="font-size: 1.3rem;">Paid</span>
+                            </label>
+                        </div>
+                            <p class="white-text" style="font-size: 1.1rem;" id="card-details">Temp ID: <%= pds[0].temp_id %></p>
+                            <p class="white-text" style="font-size: 1.1rem;" id="card-details">Participants: <%= pds.length %></p>
+                            <p class="white-text" style="font-size: 1.1rem;" id="card-details">College ID: <%= pds[0].college_id %></p>
+                            <p class="white-text" style="font-size: 1.1rem;" id="card-details">Event ID: <%= pds[0].event_id %></p>
+                    </div>
+                </div>
+            </div>
+        <% } else { %>
+            <div class="row">
+                <div class="col s10 m5 l4 push-s1 push-m3 push-l4">
+                    <div class="card-panel center" style="background-color:#3A6EA5;">
+                        <p class="white-text" style="font-size: 2.5em;" id="card-details"> Enter Temporary ID<br>or</br>Worng Temporary ID... </br>Verify & Re-Enter ID</p>
+                    </div>
+                </div>
+            </div>
+        <% } %>
+        <!--Section ends here -->
+</body>
+
+</html>
